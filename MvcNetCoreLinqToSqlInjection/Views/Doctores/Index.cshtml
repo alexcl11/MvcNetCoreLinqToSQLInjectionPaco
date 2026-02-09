@@ -17,6 +17,7 @@
             <th>Especialidad</th>
             <th>Salario</th>
             <th>Hospital</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,16 @@
                 <td>@doc.Especialidad</td>
                 <td>@doc.Salario</td>
                 <td>@doc.IdHospital</td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "Doctores",
+                    new { iddoctor = @doc.IdDoctor },
+                    new {@class = "btn btn-danger"})
+                </td>
+            <td>
+                @Html.ActionLink("Modificar", "Update", "Doctores",
+                                new { id = @doc.IdDoctor },
+                                new { @class = "btn btn-warning" })
+            </td>
             </tr>
         }
     </tbody>

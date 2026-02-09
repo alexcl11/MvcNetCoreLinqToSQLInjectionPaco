@@ -1,0 +1,30 @@
+﻿@model int 
+<h1>Create doctor</h1>
+
+<p>
+    <a asp-controller="Doctores"
+       asp-action="Index">
+        Back to list
+    </a>
+</p>
+
+<form method="post">
+    <label>Id doctor</label>
+    <input type="text" name="id"
+           class="form-control" value="@Model"/>
+    <label>Apellido</label>
+    <input type="text" name="apellido"
+           class="form-control" />
+    <label>Especialidad</label>
+    <input type="text" name="especialidad"
+           class="form-control" />
+    <label>Salario</label>
+    <input type="text" name="salario"
+           class="form-control" />
+    <label>Hospital</label>
+    <input type="text" name="idHospital"
+           class="form-control" />
+    <button class="btn btn-info">
+        Modificar doctor
+    </button>
+</form>

@@ -1,10 +1,26 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Data.SqlClient;
 using MvcNetCoreLinqToSqlInjection.Models;
 using System.Data;
+using System.Numerics;
 
 namespace MvcNetCoreLinqToSqlInjection.Repositories
 {
-    public class RepositoryDoctoresSQLServer
+
+    #region STORED PROCEDURES
+    //CREATE PROCEDURE SP_DELETE_DOCTOR
+    //(@id int)
+    //AS
+    //    DELETE FROM DOCTOR WHERE DOCTOR_NO = @id
+    //GO
+
+    //CREATE PROCEDURE SP_MODIFICAR_DOCTOR
+    //(@id int, @apellido nvarchar(50), @especialidad nvarchar(50), @salario int, @idHospital int)
+    //AS
+    //    UPDATE DOCTOR SET APELLIDO=@apellido, ESPECIALIDAD=@especialidad, SALARIO=@salario, HOSPITAL_COD=@idHospital WHERE DOCTOR_NO=@id
+    //GO
+    #endregion
+    public class RepositoryDoctoresSQLServer: IRepositoryDoctores
     {
         private SqlConnection cn;
         private SqlCommand com;
@@ -57,6 +73,35 @@ namespace MvcNetCoreLinqToSqlInjection.Repositories
             this.com.Parameters.AddWithValue("@salario", salario);
             this.com.Parameters.AddWithValue("@idhospital", idHospital);
             this.com.CommandType = CommandType.Text;
+            this.com.CommandText = sql;
+            await this.cn.OpenAsync();
+            await this.com.ExecuteNonQueryAsync();
+            await this.cn.CloseAsync();
+            this.com.Parameters.Clear();
+        }
+
+        public async Task DeleteDoctorAsync(int idDoctor)
+        {
+            string sql = "SP_DELETE_DOCTOR";
+            this.com.Parameters.AddWithValue("@id", idDoctor);
+            this.com.CommandType = CommandType.StoredProcedure;
+            this.com.CommandText = sql;
+            await this.cn.OpenAsync();
+            await this.com.ExecuteNonQueryAsync();
+            await this.cn.CloseAsync();
+            this.com.Parameters.Clear();
+        }
+
+
+        public async Task UpdateDoctorAsync(int idDoctor, string apellido, string especialidad, int salario, int idHospital)
+        {
+            string sql = "SP_MODIFICAR_DOCTOR";
+            this.com.Parameters.AddWithValue("@id", idDoctor);
+            this.com.Parameters.AddWithValue("@apellido", apellido);
+            this.com.Parameters.AddWithValue("@especialidad", especialidad);
+            this.com.Parameters.AddWithValue("@salario", salario);
+            this.com.Parameters.AddWithValue("@idHospital", idHospital);
+            this.com.CommandType = CommandType.StoredProcedure;
             this.com.CommandText = sql;
             await this.cn.OpenAsync();
             await this.com.ExecuteNonQueryAsync();

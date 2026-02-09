@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //Nota, los Repos suelen ir como Transient
 //builder.Services.AddTransient<RepositoryDoctoresSQLServer>();
-builder.Services.AddTransient<RepositoryDoctoresOracle>();
+builder.Services.AddTransient<IRepositoryDoctores, RepositoryDoctoresOracle>();
+//builder.Services.AddTransient<IRepositoryDoctores, RepositoryDoctoresSQLServer>();
 
 Coche car = new Coche();
 car.Marca = "PONTIAC";
