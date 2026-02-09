@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //Nota, los Repos suelen ir como Transient
-builder.Services.AddTransient<RepositoryDoctoresSQLServer>();
+//builder.Services.AddTransient<RepositoryDoctoresSQLServer>();
+builder.Services.AddTransient<RepositoryDoctoresOracle>();
 
 Coche car = new Coche();
 car.Marca = "PONTIAC";

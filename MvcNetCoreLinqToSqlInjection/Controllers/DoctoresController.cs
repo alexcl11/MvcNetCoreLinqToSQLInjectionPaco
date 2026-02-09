@@ -6,10 +6,11 @@ namespace MvcNetCoreLinqToSqlInjection.Controllers
 {
     public class DoctoresController : Controller
     {
-        private RepositoryDoctoresSQLServer repo;
+        //private RepositoryDoctoresSQLServer repo;
+        private RepositoryDoctoresOracle repo;
         //RECIBIMOS NUESTRO REPOSITORY
         public DoctoresController
-            (RepositoryDoctoresSQLServer repo)
+            (RepositoryDoctoresOracle repo)
         {
             this.repo = repo;
         }
