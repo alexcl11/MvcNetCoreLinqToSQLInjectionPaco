@@ -4,6 +4,7 @@ namespace MvcNetCoreLinqToSqlInjection.Repositories
 {
     public interface IRepositoryDoctores
     {
+        List<Doctor> GetDoctoresEspecialidad(string especialidad);
         List<Doctor> GetDoctores();
 
         Task CreateDoctorAsync
@@ -14,5 +15,7 @@ namespace MvcNetCoreLinqToSqlInjection.Repositories
 
         Task UpdateDoctorAsync(int idDoctor, string apellido
             , string especialidad, int salario, int idHospital);
+
+
     }
 }
